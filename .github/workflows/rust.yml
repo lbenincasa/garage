@@ -24,11 +24,5 @@ jobs:
  #   - name: Run tests
  #     run: cargo test --verbose
     steps:
-      - uses: actions/checkout@master
-      - name: Compile and release
-        uses: rust-build/rust-build.action@v1.4.5
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          RUSTTARGET: ${{ matrix.target }}
-          EXTRA_FILES: "README.md LICENSE"
+      - uses: nixbuild/nix-quick-install-action@v27
+      - run: nix build --version
