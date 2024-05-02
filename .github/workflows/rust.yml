@@ -11,32 +11,15 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        target: [x86_64-pc-windows-gnu, x86_64-unknown-linux-musl]
+    runs-on: windows-latest
+#    runs-on: ubuntu-latest
+#    strategy:
+#      matrix:
+#        target: [x86_64-pc-windows-gnu, x86_64-unknown-linux-musl]
 
-##    steps:
-##    - uses: actions/checkout@v4
-##    - name: Build
-##      run: cargo build --verbose
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build
+      run: cargo build --verbose
  #   - name: Run tests
  #     run: cargo test --verbose
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Rust
-        # Or @nightly if you want
-        uses: dtolnay/rust-toolchain@stable
-        # Arguments to pass in
-        with:
-          # Make Rust compile to our target (defined in the matrix)
-          targets: ${{ matrix.target }}
-
-      - name: Build
-        uses: actions-rs/cargo@v1
-        with:
-          use-cross: true
-          command: build
-          args: --verbose --release --target ${{ matrix.target }}
