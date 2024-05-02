@@ -221,9 +221,9 @@ pub fn gen_node_key(metadata_dir: &Path) -> Result<NodeKey, Error> {
 		{
 			use std::os::unix::fs::PermissionsExt;
 			let mut f = std::fs::File::create(key_file.as_path())?;
-			let mut perm = f.metadata()?.permissions();
-			perm.set_mode(0o600);
-			std::fs::set_permissions(key_file.as_path(), perm)?;
+			///let mut perm = f.metadata()?.permissions();
+			///perm.set_mode(0o600);
+			///std::fs::set_permissions(key_file.as_path(), perm)?;
 			f.write_all(&key[..])?;
 		}
 
