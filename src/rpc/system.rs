@@ -217,13 +217,8 @@ pub fn gen_node_key(metadata_dir: &Path) -> Result<NodeKey, Error> {
 
 		info!("Generating new node key pair.");
 		let (pubkey, key) = ed25519::gen_keypair();
-
 		{
-			/// use std::os::unix::fs::PermissionsExt;
 			let mut f = std::fs::File::create(key_file.as_path())?;
-			/// let mut perm = f.metadata()?.permissions();
-			/// perm.set_mode(0o600);
-			/// std::fs::set_permissions(key_file.as_path(), perm)?;
 			f.write_all(&key[..])?;
 		}
 
